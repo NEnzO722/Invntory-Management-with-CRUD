@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "functions": {
+    "src/server.ts": {
+      "runtime": "@vercel/node"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "src/server.ts"
+    },
+    {
+      "src": "/uploads/(.*)",
+      "dest": "uploads/$1"
+    }
+  ]
+}
