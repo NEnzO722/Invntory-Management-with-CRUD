@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Theme Specific CSS Variables ===== */
+:root {
+  --mocha: #A68A78; /* Mocha Mousse */
+  --ethereal: #A7C7E7; /* Ethereal Blue */
+  --moonlight: #1a1d23; /* Moonlight Gray */
+  --background: #0f1115;
+  --text: #f3f4f6;
+  --text-dim: #94a3b8;
+  --glass-bg: rgba(26, 29, 35, 0.6);
+  --glass-border: rgba(167, 199, 231, 0.1);
+  --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+:root.light {
+  --background: #fdfcfb; /* Warmer background */
+  --text: #1a1d23; /* Moonlight Gray for high contrast */
+  --text-dim: #53332a; /* Darker mocha for readability */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(166, 138, 120, 0.15); /* Warm border */
+  --glass-shadow: 0 12px 40px rgba(166, 138, 120, 0.08);
+}
+
+.text-premium-gradient {
+  background: linear-gradient(135deg, var(--mocha), var(--ethereal) 50%, var(--moonlight));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.light .text-premium-gradient {
+  background: linear-gradient(135deg, #8d573f, #5e96be 50%, #1a1d23);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-primary-theme {
+  color: var(--text);
+  transition: color 0.5s ease;
+}
+
+.text-secondary-theme {
+  color: var(--text-dim);
+  transition: color 0.5s ease;
+}
+
+/* ===== Base Styles ===== */
+body {
+  background: var(--background);
+  color: var(--text);
+  min-height: 100dvh;
+  font-family: 'Inter', sans-serif;
+  @apply antialiased;
+  transition: background 0.5s ease, color 0.5s ease;
+  
+  /* Dynamic Gradient Background */
+  background-image: 
+    radial-gradient(circle at 0% 0%, rgba(167, 199, 231, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 100% 100%, rgba(166, 110, 81, 0.08) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+/* ===== Components ===== */
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .btn-primary {
+    @apply flex items-center gap-2 px-6 py-3 rounded-2xl font-bold transition-all duration-300;
+    background: linear-gradient(135deg, #A7C7E7, #7eb3d3);
+    @apply text-moonlight-900 shadow-[0_8px_20px_rgba(167,199,231,0.25)];
+  }
+
+  .btn-primary:hover {
+    @apply shadow-[0_12px_28px_rgba(167,199,231,0.4)] -translate-y-0.5 scale-[1.02];
+    background: linear-gradient(135deg, #B3D9FF, #8dbce0);
+  }
+
+  .btn-accent {
+    @apply flex items-center gap-2 px-6 py-3 rounded-2xl font-bold transition-all duration-300;
+    background: linear-gradient(135deg, #A68A78, #8d573f);
+    @apply text-white shadow-[0_8px_20px_rgba(166,138,120,0.25)];
+  }
+
+  .btn-accent:hover {
+    @apply shadow-[0_12px_28px_rgba(166,138,120,0.4)] -translate-y-0.5 scale-[1.02];
+  }
+
+  .input-field {
+    @apply w-full px-5 py-4 rounded-2xl bg-mocha-50/50 dark:bg-white/5 border border-mocha-200/20 dark:border-white/10 outline-none transition-all duration-300;
+    @apply text-mocha-900 dark:text-gray-100;
+    @apply focus:border-ethereal-400/50 focus:bg-white/10 focus:shadow-[0_0_0_4px_rgba(167,199,231,0.1)];
+  }
+
+  .card-premium {
+    @apply glass-premium rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.7)] hover:border-ethereal-400/20 hover:-translate-y-2;
+  }
+
+  .glass-premium {
+    @apply glass;
+    position: relative;
+    border: 1px solid transparent !important;
+    background: 
+      linear-gradient(var(--glass-bg), var(--glass-bg)) padding-box,
+      linear-gradient(135deg, var(--mocha), var(--ethereal), var(--moonlight)) border-box;
+  }
+
+  .gradient-border {
+    position: relative;
+    border: 1px solid transparent;
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    background-image: 
+      linear-gradient(var(--background), var(--background)), 
+      linear-gradient(135deg, var(--mocha), var(--ethereal), var(--moonlight));
+  }
+
+  .label-mocha {
+    @apply text-mocha-300 font-bold text-[10px] uppercase tracking-widest mb-1.5 block;
+  }
+
+  .table-header-mocha {
+    @apply text-mocha-300 font-bold text-[10px] uppercase tracking-widest px-8 py-6;
+  }
+}
+
+/* Custom Scrollbar for Mocha/Ethereal theme */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-mocha-500/30 rounded-full hover:bg-mocha-500/50 transition-colors;
+}
