@@ -18,14 +18,22 @@ app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 app.use('/api/items', itemRoutes);
 
+// Health check and root route
+app.get('/', (req, res) => {
+  res.json({ message: 'Inventory API is running', status: 'healthy' });
+});
+
 // Export for Vercel
 export default app;
 
-if (process.env.NODE_ENV !== 'production') {
-  connectDB().then(async () => {
-    await seedIfEmpty();
+// Persistent connection for serverless
+connectDB().then(async () => {
+  await seedIfEmpty();
+  if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
-  });
-}
+  }
+}).catch(err => {
+  console.error('Failed to start server:', err);
+});
