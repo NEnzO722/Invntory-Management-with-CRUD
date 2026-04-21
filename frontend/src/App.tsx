@@ -5,7 +5,7 @@ import InventoryForm from './components/InventoryForm';
 import ErrorPage from './components/ErrorPage';
 import { Item, InventoryStats } from './types';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/items';
+const API_URL = import.meta.env.VITE_API_URL || '/api/items';
 
 function App() {
   const [items, setItems] = useState<Item[]>([]);

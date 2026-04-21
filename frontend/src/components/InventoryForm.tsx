@@ -29,7 +29,7 @@ const InventoryForm: React.FC<InventoryFormProps> = ({ item, onSubmit, onClose }
         // Handle absolute vs relative paths for preview
         const fullImageUrl = item.imageUrl.startsWith('http') 
           ? item.imageUrl 
-          : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'}${item.imageUrl}`;
+          : `${import.meta.env.VITE_API_BASE_URL || ''}${item.imageUrl}`;
         setPreviewUrl(fullImageUrl);
       }
     }
