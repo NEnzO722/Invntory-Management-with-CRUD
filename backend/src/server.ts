@@ -8,6 +8,8 @@ import { seedIfEmpty } from './controllers/itemController';
 dotenv.config();
 
 const app = express();
+console.log('StockFlow Backend Initializing...');
+
 const PORT = process.env.PORT || 8000;
 
 import path from 'path';
