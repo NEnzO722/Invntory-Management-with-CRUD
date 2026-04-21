@@ -7,6 +7,11 @@ import { Item, InventoryStats } from './types';
 
 const API_URL = import.meta.env.VITE_API_URL || '/api/items';
 
+if (API_URL.startsWith('http')) {
+  console.warn('Using absolute API URL:', API_URL);
+  console.warn('If you experience CORS errors, please delete the VITE_API_URL environment variable in the Vercel Dashboard to use relative paths.');
+}
+
 function App() {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
